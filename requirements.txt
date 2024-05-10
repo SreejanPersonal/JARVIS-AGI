@@ -1,0 +1,8 @@
+PyAudio==0.2.14
+vosk==0.3.45
+Requests==2.31.0
+playsound==1.2.2
+python-dotenv==1.0.1
+NetHyTech-STT==1.0
+groq==0.5.0
+edge-tts==6.1.11
