@@ -41,7 +41,8 @@ from ENGINE.TTS.stream_elements_api import speak
 
 # from BRAIN.AI.TEXT.API import deepInfra_TEXT
 # from BRAIN.AI.TEXT.API import openrouter
-from BRAIN.AI.TEXT.API import liaobots
+# from BRAIN.AI.TEXT.API import liaobots
+from BRAIN.AI.TEXT.API import hugging_chat
 
 
 # from BRAIN.TOOLS import groq_web_access
@@ -49,11 +50,13 @@ from BRAIN.AI.TEXT.API import liaobots
 """-------------------------------------------------------------------------------------------------MAIN-----------------------------------------------------------------------------------------------------"""
 
 # for speech in speech_to_text():
+hf_api = hugging_chat.HuggingChat_RE(model="microsoft/Phi-3-mini-4k-instruct")
 while True:
     speech = listener.listen()   
     print("Human >>", speech)
 
-    ai_response = liaobots.generate(speech)
+    ai_response = hf_api.generate(speech)
     print("AI >>", ai_response)
+    print(ai_response)
     speak(ai_response)
 
