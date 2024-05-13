@@ -6,3 +6,4 @@ python-dotenv==1.0.1
 NetHyTech-STT==1.0
 groq==0.5.0
 edge-tts==6.1.11
+googlesearch-python==1.2.4
