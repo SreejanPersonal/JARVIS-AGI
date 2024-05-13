@@ -1,8 +1,9 @@
 import requests
 import json
 import os
-from dotenv import load_dotenv
 from groq import Groq
+from googlesearch import search
+from dotenv import load_dotenv
 
 # Load environment variables from .env file
 load_dotenv()
@@ -19,9 +20,10 @@ def get_web_info(query, max_results=20, prints=False) -> str:
     Returns:
     - str: A JSON string containing the search results.
     """
-    url = f"https://oevortex-webscout.hf.space/api/search?q={query}&max_results={max_results}&safesearch=moderate&region=wt-wt"
-    response = requests.get(url).json()['results']
-    if prints: print(response)
+    results = list(search(query, num_results=max_results, advanced=True))
+    response = []
+    for link in results:
+        response.append({"link": link.url, "title": link.title, "description": link.description})
     return json.dumps(response)
 
 def generate(user_prompt, system_prompt="Be Short and Concise", prints=False) -> str:

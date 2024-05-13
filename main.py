@@ -8,6 +8,13 @@
 #  Made With 💓 By - Sree ( Devs Do Code )
 #  YouTube Channel: https://www.youtube.com/@devsdocode
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+      - Support: https://buymeacoffee.com/devsdocode
+      - Patreon: https://patreon.com/DevsDoCode
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 #  For any questions or concerns, reach out to us via our social media handles.
 #  Our top choice for contact is Telegram: https://t.me/devsdocode
 #  You can also find us on other platforms listed above. We're here to help!
@@ -19,6 +26,12 @@
 #    - Personal: https://www.instagram.com/sree.shades_/
 #    - Channel: https://www.instagram.com/devsdocode_/
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+    - Support: https://buymeacoffee.com/devsdocode
+    - Patreon: https://patreon.com/DevsDoCode
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 #  ------------------------------------------------------------------------------
 #  Dive into the world of coding with Devs Do Code - where passion meets programming!
 #  Make sure to hit that Subscribe button to stay tuned for exciting content!
