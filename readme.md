@@ -27,6 +27,8 @@
 
 Jarvis is an AI Python voice assistant designed to streamline daily tasks and enhance user productivity. Named after the iconic AI assistant from popular culture, Jarvis is built with cutting-edge natural language processing capabilities, allowing users to interact with it through voice commands. Whether it's checking the weather, setting reminders, managing calendars, or searching the web, Jarvis is equipped to handle a wide range of tasks efficiently and effectively. With its intuitive interface and robust functionality, Jarvis aims to revolutionize the way users engage with technology, making everyday tasks simpler and more convenient.
 
+### Follow This Series Live : [Jarvis 2.0 Series](https://www.youtube.com/playlist?list=PLcb7hDy97wSJ0MRX_cKufrKDUuET1K-5d)
+
 ## Devs Do Code
 
 Made With 💓 By - Sree ( Devs Do Code )
