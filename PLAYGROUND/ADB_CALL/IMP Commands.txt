@@ -1,0 +1,9 @@
+adb.exe shell input keyevent 4 // Back btn
+
+adb.exe shell input keyevent 5 // Call
+
+adb.exe shell input keyevent 5 // Call + adb shell input keyevent 66 // calls latest number
+
+adb.exe shell input keyevent 220 / 221 // Brightness down/up
+
+adb.exe shell am start -a android.intent.action.CALL -d tel:+91
