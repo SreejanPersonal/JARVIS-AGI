@@ -23,6 +23,21 @@
   <a href="https://buymeacoffee.com/devsdocode"><img alt="Buy Me A Coffee" src="https://img.shields.io/badge/Buy%20Me%20A%20Coffee-FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=black"></a>
 </div>
 
+<!-- <p align="center"> -->
+  <!-- <a href="https://memgpt.ai"><img src="https://github.com/cpacker/MemGPT/assets/5475622/80f2f418-ef92-4f7a-acab-5d642faa4991" alt="MemGPT logo"></a> -->
+<!-- </p> -->
+
+<div align="center">
+
+ <!-- <strong>MemGPT allows you to build LLM agents with long term memory & custom tools</strong> -->
+
+[![Discord](https://img.shields.io/discord/1161736243340640419?label=Discord&logo=discord&logoColor=5865F2&style=flat-square&color=5865F2)](https://discord.gg/ehwfVtsAts)
+[![Twitter Follow](https://img.shields.io/badge/follow-%40anand_sreejan-1DA1F2?style=flat-square&logo=x&logoColor=white)](https://twitter.com/anand_sreejan)
+<!-- [![arxiv 2310.08560](https://img.shields.io/badge/arXiv-2310.08560-B31B1B?logo=arxiv&style=flat-square)](https://arxiv.org/abs/2310.08560)
+[![Documentation](https://img.shields.io/github/v/release/cpacker/MemGPT?label=Documentation&logo=readthedocs&style=flat-square)](https://memgpt.readme.io/docs) -->
+
+</div>
+
 # JARVIS AGI
 
 Jarvis is an AI Python voice assistant designed to streamline daily tasks and enhance user productivity. Named after the iconic AI assistant from popular culture, Jarvis is built with cutting-edge natural language processing capabilities, allowing users to interact with it through voice commands. Whether it's checking the weather, setting reminders, managing calendars, or searching the web, Jarvis is equipped to handle a wide range of tasks efficiently and effectively. With its intuitive interface and robust functionality, Jarvis aims to revolutionize the way users engage with technology, making everyday tasks simpler and more convenient.

@@ -55,7 +55,10 @@ from ENGINE.TTS.stream_elements_api import speak
 # from BRAIN.AI.TEXT.API import deepInfra_TEXT
 # from BRAIN.AI.TEXT.API import openrouter
 # from BRAIN.AI.TEXT.API import liaobots
+# from BRAIN.AI.TEXT.API import Blackbox_ai
+# from BRAIN.AI.TEXT.API import Phind
 from BRAIN.AI.TEXT.API import hugging_chat
+
 
 
 # from BRAIN.TOOLS import groq_web_access
