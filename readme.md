@@ -31,7 +31,7 @@
 
  <!-- <strong>MemGPT allows you to build LLM agents with long term memory & custom tools</strong> -->
 
-[![Discord](https://img.shields.io/discord/1161736243340640419?label=Discord&logo=discord&logoColor=5865F2&style=flat-square&color=5865F2)](https://discord.gg/ehwfVtsAts)
+[![Discord](https://img.shields.io/discord/1161736243340640419?label=Discord&logo=discord&logoColor=5865F2&style=flat-square&color=5865F2)](https://discord.com/invite/hKkTtTfdQH)
 [![Twitter Follow](https://img.shields.io/badge/follow-%40anand_sreejan-1DA1F2?style=flat-square&logo=x&logoColor=white)](https://twitter.com/anand_sreejan)
 <!-- [![arxiv 2310.08560](https://img.shields.io/badge/arXiv-2310.08560-B31B1B?logo=arxiv&style=flat-square)](https://arxiv.org/abs/2310.08560)
 [![Documentation](https://img.shields.io/github/v/release/cpacker/MemGPT?label=Documentation&logo=readthedocs&style=flat-square)](https://memgpt.readme.io/docs) -->
