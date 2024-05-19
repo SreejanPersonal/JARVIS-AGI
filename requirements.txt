@@ -7,3 +7,4 @@ NetHyTech-STT==1.0
 groq==0.5.0
 edge-tts==6.1.11
 googlesearch-python==1.2.4
+opencv-python==4.9.0.80
