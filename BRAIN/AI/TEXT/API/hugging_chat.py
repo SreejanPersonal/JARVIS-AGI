@@ -96,11 +96,11 @@ class HuggingChat_RE:
 if __name__ == "__main__":
 
     hf_api = HuggingChat_RE(model="microsoft/Phi-3-mini-4k-instruct")
-    while True:
-        query = input("\n> ")
-        response = hf_api.generate(query, web_search=False)
-        # response = hf_api.generate(query, stream=False)
-        # print(response)
+    # while True:
+    #     query = '\033[96m' + input("\n> ") + '\033[0m'  # cyan
+    #     response = hf_api.generate(query, web_search=False)
+    #     # response = hf_api.generate(query, stream=False)
+    #     # print(response)
 
     models = {
     "meta-llama/Meta-Llama-3-70B-Instruct": "https://huggingface.co/meta-llama/Meta-Llama-3-70B-Instruct",
@@ -114,7 +114,7 @@ if __name__ == "__main__":
     }
 
     for name, url in models.items():
-        print("\n\n" + name)
-        
+        print("\033[96m\n\n" + name + "\033[0m")
+
         hf_api = HuggingChat_RE(model=name)
         hf_api.generate("Who are you ?")
