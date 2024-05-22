@@ -41,71 +41,45 @@
 #  got even better! Happy coding!
 #  ----------------------------------------------------------------------------
 
-"""-------------------------------------------------------------------------------------------------IMPORTS-------------------------------------------------------------------------------------------------"""
-import concurrent.futures
-import os
+from IMPORTS import *
 
-# from ENGINE.STT.vosk_recog import speech_to_text
-from ENGINE.STT.NetHyTech import SpeechToTextListener; listener = SpeechToTextListener()
-
-# from ENGINE.TTS.edge_tts import speak
-# from ENGINE.TTS.deepAI import speak
-# from ENGINE.TTS.ai_voice import speak, initiate_proxies
-from ENGINE.TTS.stream_elements_api import speak
-
-from BRAIN.AI.TEXT.API import deepInfra_TEXT
-from BRAIN.AI.TEXT.API import openrouter
-# from BRAIN.AI.TEXT.API import liaobots
-# from BRAIN.AI.TEXT.API import hugging_chat; hf_api = hugging_chat.HuggingChat_RE(model="microsoft/Phi-3-mini-4k-instruct")
-# from BRAIN.AI.TEXT.API import Blackbox_ai
-# from BRAIN.AI.TEXT.API import Phind
-
-from BRAIN.AI.VISION import deepInfra_VISION
-
-# from BRAIN.TOOLS import groq_web_access
-
-# from BRAIN.AI.IMAGE import deepInfra_IMG
-
-# from PLAYGROUND.ADB_CALL import make_call, android_device_connection_setup; android_device_connection_setup.initialise()
-from PLAYGROUND.WEBSITE_ASSISTANT import jenna_reader, chrome_latest_url
-from PLAYGROUND.CAMERA import camera_vision
-
-from PROMPTS import INSTRUCTIONS, BISECTORS
-
-"""-------------------------------------------------------------------------------------------------MAIN-----------------------------------------------------------------------------------------------------"""
-
-# for speech in speech_to_text():
 while True:
     speech = listener.listen()   
-    print("Human >>", speech)
+    history_manager.store_history(history_manager.history + [{"role": "user", "content": speech}])
+    print("\033[93mHuman >> {}\033[0m".format(speech))
 
-    response_img_or_text = concurrent.futures.ThreadPoolExecutor().submit(deepInfra_TEXT.generate, speech, system_prompt=BISECTORS.image_requests_v2)
-    response_classifier = concurrent.futures.ThreadPoolExecutor().submit(deepInfra_TEXT.generate, speech, system_prompt=BISECTORS.complex_task_classifier_v5, stream=False)
-    default_response = concurrent.futures.ThreadPoolExecutor().submit(deepInfra_TEXT.generate, speech, system_prompt=INSTRUCTIONS.human_response_v3_AVA, stream=False)
+    chat_response = openrouter.generate(history_manager.history, system_prompt=INSTRUCTIONS.human_response_v3_AVA, stream=True)
+    print("\n\033[92mJARVIS >> {}\033[0m".format(chat_response))
+    history_manager.update_file(speech, chat_response)
+    speak(chat_response)
+
+    # response_img_or_text = concurrent.futures.ThreadPoolExecutor().submit(deepInfra_TEXT.generate, speech, system_prompt=BISECTORS.image_requests_v2)
+    # response_classifier = concurrent.futures.ThreadPoolExecutor().submit(deepInfra_TEXT.generate, speech, system_prompt=BISECTORS.complex_task_classifier_v5, stream=False)
+    # default_response = concurrent.futures.ThreadPoolExecutor().submit(openrouter.generate, speech, system_prompt=INSTRUCTIONS.human_response_v3_AVA, stream=False)
     
-    concurrent.futures.wait([response_img_or_text, response_classifier, default_response])
-    print("Classifier >> ", "\033[91m" + response_classifier.result() + "\033[0m")
+    # concurrent.futures.wait([response_img_or_text, response_classifier, default_response])
+    # print("Classifier >> ", "\033[91m" + response_classifier.result() + "\033[0m")
 
-    if "vision" in response_classifier.result().lower():
-        concurrent.futures.ThreadPoolExecutor().submit(speak("Analysing, Please Wait"))
-        image_path = camera_vision.realtime_vision()
-        response_vison = deepInfra_VISION.generate(speech, system_prompt=INSTRUCTIONS.vison_realtime_v1, image_path=image_path)
-        print("AI>>", response_vison)
-        os.remove(image_path)
-        speak(response_vison)
+    # if "vision" in response_classifier.result().lower():
+    #     concurrent.futures.ThreadPoolExecutor().submit(speak("Analysing, Please Wait"))
+    #     image_path = camera_vision.realtime_vision()
+    #     response_vison = deepInfra_VISION.generate(speech, system_prompt=INSTRUCTIONS.vison_realtime_v1, image_path=image_path)
+    #     print("AI>>", response_vison)
+    #     os.remove(image_path)
+    #     speak(response_vison)
 
-    elif "call" in response_classifier.result().lower():
-        speak("Sure Sir. Calling")
-        # make_call.call()
+    # elif "call" in response_classifier.result().lower():
+    #     speak("Sure Sir. Calling")
+    #     # make_call.call()
 
-    elif "website" in response_classifier.result().lower():
-        site_markdown = jenna_reader.fetch_website_content(chrome_latest_url.get_latest_chrome_url())
-        response = openrouter.generate(f"METEDATA: {site_markdown}\n\nQUERY: {speech}", system_prompt="Keep you responses very short and concise")
-        speak(response, voice="Salli")
+    # elif "website" in response_classifier.result().lower():
+    #     site_markdown = jenna_reader.fetch_website_content(chrome_latest_url.get_latest_chrome_url())
+    #     response = openrouter.generate(f"METEDATA: {site_markdown}\n\nQUERY: {speech}", system_prompt="Keep you responses very short and concise")
+    #     speak(response, voice="Salli")
 
-    else: 
-        print("AI>>", default_response.result())
-        speak(default_response.result())
+    # else: 
+    #     print("AI>>", default_response.result())
+    #     speak(default_response.result())
 
 
 
@@ -140,4 +114,3 @@ while True:
     # speak("Sure sir, generating images for you")
     # images_link = deepInfra_IMG.generate(speech)
     # print(images_link)
-
