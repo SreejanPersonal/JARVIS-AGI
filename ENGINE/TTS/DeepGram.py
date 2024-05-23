@@ -1,6 +1,6 @@
 import requests
 import base64
-from playsound import playsound
+from TOOLS.AUDIO import Interrupted_Playsound
 import os
 
 def speak(text: str, model: str = "aura-arcas-en", filename: str = "ASSETS/output_audio.mp3"):
@@ -30,7 +30,7 @@ def speak(text: str, model: str = "aura-arcas-en", filename: str = "ASSETS/outpu
     with open(filename, 'wb') as audio_file:
         audio_file.write(base64.b64decode(response.json()['data']))
     
-    playsound(filename)
+    Interrupted_Playsound(filename)
     os.remove(filename)
 
 if __name__ == "__main__":
