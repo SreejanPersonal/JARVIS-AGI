@@ -2,13 +2,13 @@
 
 import concurrent.futures
 import os
-import webbrowser
 
 """----------------------------------------------------------------------------------------------USER IMPORTS----------------------------------------------------------------------"""
 
 # from ENGINE.STT.vosk_recog import speech_to_text
 from ENGINE.STT.NetHyTech import SpeechToTextListener
 
+# from ENGINE.TTS.hearling import Partial_Async_HearlingAudioGenerator
 from ENGINE.TTS.DeepGram import speak
 # from ENGINE.TTS.edge_tts import speak
 # from ENGINE.TTS.deepAI import speak
@@ -40,3 +40,4 @@ from TOOLS import Alpaca_DS_Converser
 
 listener = SpeechToTextListener()
 history_manager = Alpaca_DS_Converser.ConversationHistoryManager()
+# engine = Partial_Async_HearlingAudioGenerator()
