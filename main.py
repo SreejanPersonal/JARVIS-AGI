@@ -48,10 +48,11 @@ while True:
     history_manager.store_history(history_manager.history + [{"role": "user", "content": speech}])
     print("\033[93mHuman >> {}\033[0m".format(speech))
 
-    chat_response = openrouter.generate(history_manager.history, system_prompt=INSTRUCTIONS.human_response_v3_AVA, stream=True)
-    print("\n\033[92mJARVIS >> {}\033[0m".format(chat_response))
+    chat_response = Phind.generate(history_manager.history, system_prompt=INSTRUCTIONS.hindi_only_system_prompt_v3, stream=True)
+    print("\n\033[92mJARVIS >> {}\033[0m\n".format(chat_response))
     history_manager.update_file(speech, chat_response)
-    speak(chat_response)
+    engine.speak(chat_response, voice="hi-IN-Wavenet-D")
+
 
     # response_img_or_text = concurrent.futures.ThreadPoolExecutor().submit(deepInfra_TEXT.generate, speech, system_prompt=BISECTORS.image_requests_v2)
     # response_classifier = concurrent.futures.ThreadPoolExecutor().submit(deepInfra_TEXT.generate, speech, system_prompt=BISECTORS.complex_task_classifier_v5, stream=False)

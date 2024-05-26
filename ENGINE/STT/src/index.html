@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=1">
+  <title>Speech to Text</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #181818; 
+      color: #f0f0f0; 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      text-align: center;
+      position: relative; 
+    }
+
+    .watermark {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      font-size: 1.2rem;
+      color: rgba(245, 197, 66, 0.6); 
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); 
+    }
+
+    .voice_to_text {
+      background: linear-gradient(to bottom right, #282828, #383838); 
+      padding: 60px;
+      border-radius: 24px; 
+      box-shadow: 0 12px 24px rgba(0,0,0,0.4);
+      max-width: 700px;
+      max-height: 500px;
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      color: #f5c542; 
+      margin-bottom: 30px;
+      font-size: 3rem;
+      text-shadow: 0 4px 8px rgba(0,0,0,0.5);
+      font-weight: 700; 
+    }
+
+    #convert_text {
+      width: 500px;
+      height: 200px;
+      padding: 20px;
+      margin-bottom: 30px;
+      border: none;
+      border-radius: 12px;
+      background: #262626;
+      color: #e0e0e0;
+      font-size: 18px;
+      resize: none;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    #click_to_record {
+      background: #f5c542; 
+      border: none;
+      padding: 20px 50px;
+      color: #181818; 
+      border-radius: 12px;
+      font-size: 20px;
+      cursor: pointer;
+      transition: background 0.3s, box-shadow 0.3s;
+      box-shadow: 0 8px 16px rgba(245, 197, 66, 0.5);
+      font-weight: 700;
+    }
+
+    #click_to_record:hover {
+      background: #e1b134; 
+      box-shadow: 0 10px 20px rgba(225, 177, 52, 0.7);
+    }
+
+    #is_recording, #confidence_id {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #a6a6a6; 
+      font-family: 'Poppins', sans-serif;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 18px; 
+      color: #ddd;
+      text-align: center;
+      font-family: 'Poppins', sans-serif; 
+    }
+
+    a {
+      color: #f5c542; 
+      text-decoration: none;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700; 
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .dropdown-container {
+      margin-bottom: 20px;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    select {
+      width: 100%;
+      padding: 15px;
+      border-radius: 12px;
+      background: #262626;
+      color: #e0e0e0;
+      font-size: 18px;
+      border: none;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      cursor: pointer;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    select option {
+      background: #262626;
+      color: #e0e0e0;
+    }
+
+    .select-wrapper {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .select-wrapper::after {
+      content: '▼';
+      position: absolute;
+      top: 50%;
+      right: 15px;
+      transform: translateY(-50%);
+      color: #e0e0e0;
+      pointer-events: none;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin: 0 10px;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #f5c542; 
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .social-icons a:hover {
+      background-color: #f5c542; 
+      color: #181818; 
+    }
+
+    .social-icons i {
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="watermark">Powered by Devs Do Code</div> 
+
+  <div class="voice_to_text">
+    <h1>SPEECH TO TEXT</h1>
+    <div class="dropdown-container">
+      <div class="select-wrapper">
+        <select id="language_select">
+          <option value="hi-IN">Hindi (India)</option>
+          <option value="en-IN">English (India)</option>
+          <option value="en-US">English (United States)</option>
+          <option value="pa-IN">Punjabi (India)</option>
+          <option value="en-GB">English (United Kingdom)</option>
+          <option value="en-AU">English (Australia)</option>
+          <option value="en-NZ">English (New Zealand)</option>
+          <option value="es-ES">Spanish (Spain)</option>
+          <option value="zh-CN">Chinese (Simplified, China)</option>
+          <option value="ar-SA">Arabic (Saudi Arabia)</option>
+          <option value="pt-BR">Portuguese (Brazil)</option>
+          <option value="ru-RU">Russian (Russia)</option>
+          <option value="ja-JP">Japanese (Japan)</option>
+          <option value="de-DE">German (Germany)</option>
+          <option value="fr-FR">French (France)</option>
+          <option value="ko-KR">Korean (South Korea)</option>
+          <option value="it-IT">Italian (Italy)</option>
+          <option value="tr-TR">Turkish (Turkey)</option>
+          <option value="vi-VN">Vietnamese (Vietnam)</option>
+          <option value="pl-PL">Polish (Poland)</option>
+          <option value="nl-NL">Dutch (Netherlands)</option>
+          <option value="th-TH">Thai (Thailand)</option>
+          <option value="sv-SE">Swedish (Sweden)</option>
+          <option value="fa-IR">Persian (Iran)</option>
+          <option value="cs-CZ">Czech (Czech Republic)</option>
+          <option value="el-GR">Greek (Greece)</option>
+          <option value="da-DK">Danish (Denmark)</option>
+          <option value="fi-FI">Finnish (Finland)</option>
+          <option value="he-IL">Hebrew (Israel)</option>
+          <option value="id-ID">Indonesian (Indonesia)</option>
+          <option value="nb-NO">Norwegian (Norway)</option>
+          <option value="ro-RO">Romanian (Romania)</option>
+          <option value="sk-SK">Slovak (Slovakia)</option>
+          <option value="uk-UA">Ukrainian (Ukraine)</option>
+          <option value="hu-HU">Hungarian (Hungary)</option>
+          <option value="sl-SI">Slovenian (Slovenia)</option>
+          <option value="hr-HR">Croatian (Croatia)</option>
+          <option value="et-EE">Estonian (Estonia)</option>
+          <option value="lt-LT">Lithuanian (Lithuania)</option>
+          <option value="lv-LV">Latvian (Latvia)</option>
+          <option value="sr-RS">Serbian (Serbia)</option>
+          <option value="bg-BG">Bulgarian (Bulgaria)</option>
+          <option value="kk-KZ">Kazakh (Kazakhstan)</option>
+          <option value="hy-AM">Armenian (Armenia)</option>
+          <option value="ur-PK">Urdu (Pakistan)</option>
+          <option value="ca-ES">Catalan (Spain)</option>
+          <option value="eu-ES">Basque (Spain)</option>
+          <option value="gl-ES">Galician (Spain)</option>
+          <option value="af-ZA">Afrikaans (South Africa)</option>
+          <option value="is-IS">Icelandic (Iceland)</option>
+          <option value="zu-ZA">Zulu (South Africa)</option>
+          <option value="km-KH">Khmer (Cambodia)</option>
+          <option value="ky-KG">Kyrgyz (Kyrgyzstan)</option>
+          <option value="tk-TM">Turkmen (Turkmenistan)</option>
+          <option value="eo">Esperanto</option>
+          <option value="gu-IN">Gujarati (India)</option>
+          <option value="kn-IN">Kannada (India)</option>
+          <option value="ml-IN">Malayalam (India)</option>
+          <option value="mr-IN">Marathi (India)</option>
+          <option value="bn-BD">Bengali (Bangladesh)</option>
+          <option value="bo-CN">Tibetan</option>
+          <option value="az-AZ">Azerbaijani</option>
+          <option value="ka-GE">Georgian (Georgia)</option>
+          <option value="mk-MK">Macedonian</option>
+          <option value="mn-MN">Mongolian</option>
+          <option value="uz-UZ">Uzbek</option>
+          <option value="xh-ZA">Xhosa</option>
+          <option value="mt-MT">Maltese</option>
+          <option value="ast">Asturian</option>
+          <option value="be">Belarusian</option>
+        </select>
+      </div>
+    </div>
+    <textarea id="convert_text" placeholder="Your speech will appear here..."></textarea>
+    <button id="click_to_record">Start Recording</button>
+    <div id="is_recording">Recording: False</div>
+    <div id="confidence_id">Confidence: 0</div>
+  </div>
+  
+  <footer>
+    Made with ❤️ by <a href="https://www.youtube.com/@devsdocode" target="_blank">Sree</a>
+  </footer>
+  <div class="social-icons">
+    <a href="https://www.youtube.com/@devsdocode" target="_blank"><i class="fab fa-youtube"></i></a>
+    <a href="https://www.instagram.com/sree.shades_" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="https://t.me/devsdocode" target="_blank"><i class="fab fa-telegram"></i></a>
+    <a href="https://twitter.com/anand_sreejan" target="_blank"><i class="fab fa-twitter"></i></a>
+    <a href="https://github.com/SreejanPersonal" target="_blank"><i class="fab fa-github"></i></a>
+    <a href="https://www.linkedin.com/in/developer-sreejan/" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="https://www.buymeacoffee.com/devsdocode" target="_blank"><i class="fas fa-coffee"></i></a>
+    <a href="https://www.patreon.com/devsdocode" target="_blank"><i class="fab fa-patreon"></i></a>
+  </div>
+
+  <script>
+        const click_to_record = document.getElementById('click_to_record');
+        const convert_text = document.getElementById('convert_text');
+        const is_recording = document.getElementById('is_recording');
+        const confidence_id = document.getElementById('confidence_id');
+        const language_select = document.getElementById('language_select');
+
+        click_to_record.addEventListener('click',function(){
+            var speech = true;
+            window.SpeechRecognition = window.webkitSpeechRecognition;
+
+            const recognition = new SpeechRecognition();
+            recognition.interimResults = true;
+            recognition.lang = language_select.value; 
+
+            recognition.addEventListener('start', () => {
+                is_recording.innerHTML = "Recording: True";
+            });
+
+            recognition.addEventListener('end', () => {
+                is_recording.innerHTML = "Recording: False";
+            });
+
+            recognition.addEventListener('result', e => {
+                const transcript = Array.from(e.results)
+                    .map(result => result[0])
+                    .map(result => result.transcript)
+                    .join('');
+
+                convert_text.innerHTML = transcript;
+                console.log(transcript);
+
+                const confidence = Array.from(e.results)
+                .map(result => result[0])
+                .map(result => result.confidence)
+                .join('');
+                confidence_id.innerHTML = `Confidence: ${confidence}`;
+                console.log(confidence);
+            });
+
+            if (speech == true) {
+                recognition.start();
+            }
+        })
+  </script>
+</body>
+</html>
