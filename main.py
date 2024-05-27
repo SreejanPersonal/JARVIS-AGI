@@ -44,44 +44,54 @@
 from IMPORTS import *
 
 while True:
-    speech = listener.listen()   
-    history_manager.store_history(history_manager.history + [{"role": "user", "content": speech}])
-    print("\033[93mHuman >> {}\033[0m".format(speech))
 
-    chat_response = Phind.generate(history_manager.history, system_prompt=INSTRUCTIONS.hindi_only_system_prompt_v3, stream=True)
-    print("\n\033[92mJARVIS >> {}\033[0m\n".format(chat_response))
-    history_manager.update_file(speech, chat_response)
-    engine.speak(chat_response, voice="hi-IN-Wavenet-D")
+    speech = listener.listen()
 
+    # taskExecutor.process_query(speech)
 
-    # response_img_or_text = concurrent.futures.ThreadPoolExecutor().submit(deepInfra_TEXT.generate, speech, system_prompt=BISECTORS.image_requests_v2)
-    # response_classifier = concurrent.futures.ThreadPoolExecutor().submit(deepInfra_TEXT.generate, speech, system_prompt=BISECTORS.complex_task_classifier_v5, stream=False)
-    # default_response = concurrent.futures.ThreadPoolExecutor().submit(openrouter.generate, speech, system_prompt=INSTRUCTIONS.human_response_v3_AVA, stream=False)
-    
-    # concurrent.futures.wait([response_img_or_text, response_classifier, default_response])
-    # print("Classifier >> ", "\033[91m" + response_classifier.result() + "\033[0m")
+    if speech.lower().startswith("jarvis") or speech.lower().endswith("jarvis"):
+        speech = speech[6:].strip()
+        print("Updated Speech:", speech)
 
-    # if "vision" in response_classifier.result().lower():
-    #     concurrent.futures.ThreadPoolExecutor().submit(speak("Analysing, Please Wait"))
-    #     image_path = camera_vision.realtime_vision()
-    #     response_vison = deepInfra_VISION.generate(speech, system_prompt=INSTRUCTIONS.vison_realtime_v1, image_path=image_path)
-    #     print("AI>>", response_vison)
-    #     os.remove(image_path)
-    #     speak(response_vison)
+        response_img_or_text = concurrent.futures.ThreadPoolExecutor().submit(deepInfra_TEXT.generate, [{"role": "user", "content": "Text to Classify -->" + speech}], system_prompt=BISECTORS.image_requests_v2)
+        response_classifier = concurrent.futures.ThreadPoolExecutor().submit(deepInfra_TEXT.generate, [{"role": "user", "content": "Text to Classify -->" + speech}], system_prompt=BISECTORS.complex_task_classifier_v5, stream=False)
+        default_response = concurrent.futures.ThreadPoolExecutor().submit(openrouter.generate, history_manager.history, system_prompt=INSTRUCTIONS.human_response_v3_AVA, stream=False)
+        
+        concurrent.futures.wait([response_img_or_text, response_classifier, default_response])
+        print("Classifier >> ", "\033[91m" + response_classifier.result() + "\033[0m")
 
-    # elif "call" in response_classifier.result().lower():
-    #     speak("Sure Sir. Calling")
-    #     # make_call.call()
+        if "vision" in response_classifier.result().lower():
+            concurrent.futures.ThreadPoolExecutor().submit(speak("Analysing, Please Wait"))
+            image_path = camera_vision.realtime_vision()
+            response_vison = deepInfra_VISION.generate(speech, system_prompt=INSTRUCTIONS.vison_realtime_v1, image_path=image_path)
+            print("AI>>", response_vison)
+            os.remove(image_path)
+            speak(response_vison)
 
-    # elif "website" in response_classifier.result().lower():
-    #     site_markdown = jenna_reader.fetch_website_content(chrome_latest_url.get_latest_chrome_url())
-    #     response = openrouter.generate(f"METEDATA: {site_markdown}\n\nQUERY: {speech}", system_prompt="Keep you responses very short and concise")
-    #     speak(response, voice="Salli")
+        elif "call" in response_classifier.result().lower():
+            speak("Sure Sir. Calling")
+            # make_call.call()
 
-    # else: 
-    #     print("AI>>", default_response.result())
-    #     speak(default_response.result())
+        elif "website" in response_classifier.result().lower():
+            site_markdown = jenna_reader.fetch_website_content(chrome_latest_url.get_latest_chrome_url())
+            response = openrouter.generate(f"METEDATA: {site_markdown}\n\nQUERY: {speech}", system_prompt="Keep you responses very short and concise")
+            speak(response, voice="Salli")
 
+        else: 
+            print("AI>>", default_response.result())
+            speak(default_response.result())
+
+    else:
+        history_manager.store_history(history_manager.history + [{"role": "user", "content": speech}])
+        print("\033[93mHuman >> {}\033[0m".format(speech))
+
+        # chat_response = Phind.generate(history_manager.history, system_prompt=INSTRUCTIONS.hindi_only_system_prompt_v3, stream=True)
+        chat_response = Phind.generate(history_manager.history, system_prompt=INSTRUCTIONS.human_response_v3_AVA, stream=True)
+        print("\n\033[92mJARVIS >> {}\033[0m\n".format(chat_response))
+        history_manager.update_file(speech, chat_response)
+        speak(chat_response)
+        
+        # engine.speak(chat_response, voice="hi-IN-Wavenet-D")
 
 
 
