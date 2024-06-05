@@ -20,6 +20,7 @@ from BRAIN.AI.TEXT.API import openrouter
 from BRAIN.AI.TEXT.API import deepInfra_TEXT
 from BRAIN.AI.TEXT.API import Phind
 from BRAIN.AI.TEXT.API import Pi_Ai
+from BRAIN.AI.TEXT.API import deepseek_ai
 # from BRAIN.AI.TEXT.API import liaobots
 # from BRAIN.AI.TEXT.API import hugging_chat; hf_api = hugging_chat.HuggingChat_RE(model="microsoft/Phi-3-mini-4k-instruct")
 # from BRAIN.AI.TEXT.API import Blackbox_ai
@@ -42,5 +43,6 @@ from TOOLS import Alpaca_DS_Converser, RawDog
 
 listener = SpeechToTextListener(language="en-IN")
 history_manager = Alpaca_DS_Converser.ConversationHistoryManager()
+ai_model = deepseek_ai.DeepSeekAPI()
 # taskExecutor = RawDog.TaskExecutor()
 # engine = Partial_Async_HearlingAudioGenerator()

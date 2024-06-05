@@ -88,7 +88,8 @@ while True:
         # chat_response = Phind.generate(history_manager.history, system_prompt=INSTRUCTIONS.hindi_only_system_prompt_v3, stream=True)
         # chat_response = Phind.generate(history_manager.history, system_prompt=INSTRUCTIONS.human_response_v3_AVA, stream=True)
         
-        chat_response = Pi_Ai.generate(speech, prints=False)
+        # chat_response = Pi_Ai.generate(speech, prints=False)
+        chat_response = ai_model.generate(speech)
         print("\n\033[92mJARVIS >> {}\033[0m\n".format(chat_response))
         history_manager.update_file(speech, chat_response)
         speak(chat_response)
