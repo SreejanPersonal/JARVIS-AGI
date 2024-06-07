@@ -47,18 +47,22 @@ while True:
 
     speech = listener.listen()
 
-    # taskExecutor.process_query(speech)
-
     if speech.lower().startswith("jarvis") or speech.lower().endswith("jarvis"):
         speech = speech[6:].strip()
         print("Updated Speech:", speech)
 
-        response_img_or_text = concurrent.futures.ThreadPoolExecutor().submit(deepInfra_TEXT.generate, [{"role": "user", "content": "Text to Classify -->" + speech}], system_prompt=BISECTORS.image_requests_v2)
+        response_img_or_text = concurrent.futures.ThreadPoolExecutor().submit(deepInfra_TEXT.generate, [{"role": "user", "content": "Text to Classify -->" + speech}], system_prompt=BISECTORS.image_requests_v3)
         response_classifier = concurrent.futures.ThreadPoolExecutor().submit(deepInfra_TEXT.generate, [{"role": "user", "content": "Text to Classify -->" + speech}], system_prompt=BISECTORS.complex_task_classifier_v5, stream=False)
         default_response = concurrent.futures.ThreadPoolExecutor().submit(openrouter.generate, history_manager.history, system_prompt=INSTRUCTIONS.human_response_v3_AVA, stream=False)
         
         concurrent.futures.wait([response_img_or_text, response_classifier, default_response])
-        print("Classifier >> ", "\033[91m" + response_classifier.result() + "\033[0m")
+        print("Response Classifier >> ", "\033[91m" + response_classifier.result() + "\033[0m")
+        print("Image or Text Classifier >> ", "\033[91m" + response_img_or_text.result() + "\033[0m")
+
+        if "yes" in response_img_or_text.result().lower():
+            speak("Sure Sir, Generating Your Image")
+            decohere_ai.generate(speech)
+            continue
 
         if "vision" in response_classifier.result().lower():
             concurrent.futures.ThreadPoolExecutor().submit(speak("Analysing, Please Wait"))
@@ -78,6 +82,7 @@ while True:
             speak(response, voice="Salli")
 
         else: 
+            # taskExecutor.process_query(speech)
             print("AI>>", default_response.result())
             speak(default_response.result())
 

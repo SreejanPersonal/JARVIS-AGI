@@ -30,6 +30,7 @@ from BRAIN.AI.VISION import deepInfra_VISION
 # from BRAIN.TOOLS import groq_web_access
 
 # from BRAIN.AI.IMAGE import deepInfra_IMG
+from BRAIN.AI.IMAGE import decohere_ai
 
 # from PLAYGROUND.ADB_CALL import make_call, android_device_connection_setup; android_device_connection_setup.initialise()
 from PLAYGROUND.WEBSITE_ASSISTANT import jenna_reader, chrome_latest_url
