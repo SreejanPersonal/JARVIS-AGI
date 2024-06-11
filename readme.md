@@ -23,78 +23,134 @@
   <a href="https://buymeacoffee.com/devsdocode"><img alt="Buy Me A Coffee" src="https://img.shields.io/badge/Buy%20Me%20A%20Coffee-FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=black"></a>
 </div>
 
-<!-- <p align="center"> -->
-  <!-- <a href="https://memgpt.ai"><img src="https://github.com/cpacker/MemGPT/assets/5475622/80f2f418-ef92-4f7a-acab-5d642faa4991" alt="MemGPT logo"></a> -->
-<!-- </p> -->
-
 <div align="center">
-
- <!-- <strong>MemGPT allows you to build LLM agents with long term memory & custom tools</strong> -->
-
-[![Discord](https://img.shields.io/discord/1161736243340640419?label=Discord&logo=discord&logoColor=5865F2&style=flat-square&color=5865F2)](https://discord.com/invite/hKkTtTfdQH)
-[![Twitter Follow](https://img.shields.io/badge/follow-%40anand_sreejan-1DA1F2?style=flat-square&logo=x&logoColor=white)](https://twitter.com/anand_sreejan)
-<!-- [![arxiv 2310.08560](https://img.shields.io/badge/arXiv-2310.08560-B31B1B?logo=arxiv&style=flat-square)](https://arxiv.org/abs/2310.08560)
-[![Documentation](https://img.shields.io/github/v/release/cpacker/MemGPT?label=Documentation&logo=readthedocs&style=flat-square)](https://memgpt.readme.io/docs) -->
-
+  <h1>🛑 Follow This Series Live: <a href="https://www.youtube.com/playlist?list=PLcb7hDy97wSJ0MRX_cKufrKDUuET1K-5d">Jarvis 2.0 Series</a></h1>
 </div>
 
-# JARVIS AGI
-
-Jarvis is an AI Python voice assistant designed to streamline daily tasks and enhance user productivity. Named after the iconic AI assistant from popular culture, Jarvis is built with cutting-edge natural language processing capabilities, allowing users to interact with it through voice commands. Whether it's checking the weather, setting reminders, managing calendars, or searching the web, Jarvis is equipped to handle a wide range of tasks efficiently and effectively. With its intuitive interface and robust functionality, Jarvis aims to revolutionize the way users engage with technology, making everyday tasks simpler and more convenient.
-
-### Follow This Series Live : [Jarvis 2.0 Series](https://www.youtube.com/playlist?list=PLcb7hDy97wSJ0MRX_cKufrKDUuET1K-5d)
-
-## Devs Do Code
-
-Made With 💓 By - Sree ( Devs Do Code )
-- YouTube Channel: [Devs Do Code](https://www.youtube.com/@devsdocode)
-
-For any questions or concerns, reach out to us via our social media handles.
-Our top choice for contact is Telegram: [Devs Do Code Telegram](https://t.me/devsdocode)
-You can also find us on other platforms listed above. We're here to help!
-
-- YouTube Channel: [Devs Do Code](https://www.youtube.com/@DevsDoCode)
-- Telegram Group: [Devs Do Code Telegram](https://t.me/devsdocode)
-- Discord Server: [Devs Do Code Discord](https://discord.gg/ehwfVtsAts)
-- Instagram:
-  - Personal: [Sree](https://www.instagram.com/sree.shades_/)
-  - Channel: [Devs Do Code](https://www.instagram.com/devsdocode_/)
-
 ---
 
-Dive into the world of coding with Devs Do Code - where passion meets programming!
-Make sure to hit that Subscribe button to stay tuned for exciting content!
+# JARVIS-AGI
 
-Pro Tip: For optimal performance and a seamless experience, we recommend using
-the default library versions demonstrated in this demo. Your coding journey just
-got even better! Happy coding!
+## Project Overview
 
----
+JARVIS-AGI is an advanced AI project designed to integrate multiple AI capabilities, including speech recognition, text processing, and image analysis, into a cohesive system. Named after the iconic AI assistant from popular culture, Jarvis is built with cutting-edge natural language processing capabilities, allowing users to interact with it through voice commands. Whether it's checking the weather, setting reminders, managing calendars, or searching the web, Jarvis is equipped to handle a wide range of tasks efficiently and effectively. With its intuitive interface and robust functionality, Jarvis aims to revolutionize the way users engage with technology, making everyday tasks simpler and more convenient.
 
-Sure, here's how you can integrate the installation steps for Vosk speech recognition models into your README:
+## Table of Contents
 
+- [Project Overview](#project-overview)
+- [Features](#features)
+- [Directory Structure](#directory-structure)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+- [Connect with Us](#connect-with-us)
+
+## Features
+
+- **Speech Recognition**: Convert spoken language into text using various models.
+- **Text Processing**: Analyze and generate text with multiple AI tools.
+- **Image Analysis**: Perform image recognition and processing tasks.
+- **Audio Tools**: Detect hotwords and manage audio playback interruptions.
+- **Interactive Prompts**: Predefined prompts to guide AI interactions.
+
+## Directory Structure
+
+The project is organized into several key directories:
+
+```
+JARVIS-AGI-main/
+│
+├── ASSETS
+│   ├── SOUNDS
+│   └── Vosk
+│       └── vosk-model-small-en-us-0.15
+│
+├── BRAIN
+│   ├── AI
+│   │   ├── IMAGE
+│   │   │   ├── decohere_ai.py
+│   │   │   └── deepInfra_IMG.py
+│   │   ├── TEXT
+│   │   │   └── API
+│   │   │       ├── Blackbox_ai.py
+│   │   │       ├── FarFalle.py
+│   │   │       ├── Phind.py
+│   │   │       ├── Pi_Ai.py
+│   │   │       ├── deepInfra_TEXT.py
+│   │   │       ├── deepseek_ai.py
+│   │   │       ├── hugging_chat.py
+│   │   │       └── openrouter.py
+│   │   └── VISION
+│   │       └── deepInfra_VISION.py
+│   └── TOOLS
+│       └── groq_web_access.py
+│
+├── ENGINE
+│   ├── STT
+│   │   ├── DevsDoCode.py
+│   │   ├── NetHyTech.py
+│   │   ├── src
+│   │   │   └── index.html
+│   │   └── vosk_recog.py
+│   └── TTS
+│       ├── DeepGram.py
+│       ├── ai_voice.py
+│       ├── deepAI.py
+│       ├── edge_tts.py
+│       ├── hearling.py
+│       └── stream_elements_api.py
+│
+├── PLAYGROUND
+│   ├── ADB_CALL
+│   │   ├── ADB COMMANDS.txt
+│   │   ├── Details.txt
+│   │   ├── IMP Commands.txt
+│   │   ├── android_device_connection_setup.py
+│   │   └── make_call.py
+│   ├── CAMERA
+│   │   └── camera_vision.py
+│   └── WEBSITE_ASSISTANT
+│       ├── chrome_latest_url.py
+│       └── jenna_reader.py
+│
+├── PROMPTS
+│   ├── BISECTORS.py
+│   ├── INSTRUCTIONS.py
+│   ├── PROMPTS.py
+│   └── SYSTEM.py
+│
+├── TOOLS
+│   ├── AUDIO
+│   │   ├── Hotword_Detection.py
+│   │   └── Interrupted_Playsound.py
+│   ├── Alpaca_DS_Converser.py
+│   └── RawDog.py
+│
+├── CODE_OF_CONDUCT.md
+├── IMPORTS.py
+├── LICENSE
+├── SpeedTester.py
+├── main.py
+├── readme.md
+└── requirements.txt
+```
 
 ## Installation
 
-To run this project locally, follow these steps:
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/SreejanPersonal/JARVIS-AGI.git
+   cd JARVIS-AGI
+   ```
 
-1. Download the Project from Youtube Description
+2. **Install the required packages**:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-2. Navigate to the project directory.
+3. **(Optional) Install Vosk Speech Recognition Models**:
 
-```bash
-cd <your-main-project-directory>
-```
-
-3. Install the required dependencies using `requirements.txt`.
-
-```bash
-pip install -r requirements.txt
-```
-
-
-4. `(Optional)` Install Vosk Speech Recognition Models:
-   
    Vosk provides pre-trained models for various languages. To install the models for your desired language, follow these steps:
 
    - Go to the Vosk GitHub repository releases page: [Vosk GitHub Releases](https://github.com/alphacep/vosk-api/releases)
@@ -107,15 +163,57 @@ pip install -r requirements.txt
      from ENGINE.STT.vosk_recog import speech_to_text
 
      for speech in speech_to_text(model_path="ASSETS/Vosk/vosk-model-small-en-us-0.15"):
-        if speech != "":
-            print("Human >>", speech)
-      ```
+         if speech != "":
+             print("Human >>", speech)
+     ```  
 
-5. Run the `main.py` file.
+## Usage
 
-```bash
-python main.py
-```
+1. **Run the main script**:
+   ```bash
+   python main.py
+   ```
+
+2. **Configuration**: Modify API configuration
+
+ in the `.env` directory to suit your needs.
+
+## Contributing
+
+We welcome contributions to improve JARVIS-AGI. To contribute, follow these steps:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-branch`).
+3. Commit your changes (`git commit -m 'Add new feature'`).
+4. Push to the branch (`git push origin feature-branch`).
+5. Create a new Pull Request.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Connect with Us
+
+Made With 💓 By - Sree (Devs Do Code)
+
+For any questions or concerns, reach out to us via our social media handles. Our top choice for contact is Telegram: [Devs Do Code Telegram](https://t.me/devsdocode)
+
+- YouTube Channel: [Devs Do Code](https://www.youtube.com/@devsdocode)
+- Telegram Group: [Devs Do Code Telegram](https://t.me/devsdocode)
+- Discord Server: [Devs Do Code Discord](https://discord.gg/ehwfVtsAts)
+- Instagram:
+  - Personal: [Sree](https://www.instagram.com/sree.shades_/)
+  - Channel: [Devs Do Code](https://www.instagram.com/devsdocode_/)
+
+---
+
+## Devs Do Code
+
+Dive into the world of coding with Devs Do Code - where passion meets programming! Make sure to hit that Subscribe button to stay tuned for exciting content!
+
+Pro Tip: For optimal performance and a seamless experience, we recommend using the default library versions demonstrated in this demo. Your coding journey just got even better! Happy coding!
+
+---
 
 Now you're all set to explore the Devs Do Code's project! Enjoy coding!
 
@@ -127,3 +225,5 @@ Now you're all set to explore the Devs Do Code's project! Enjoy coding!
   <a href="https://patreon.com/DevsDoCode"><img alt="Support on Patreon" src="https://img.shields.io/badge/Patreon-FF424D?style=for-the-badge&logo=patreon&logoColor=white"></a>
   <a href="https://buymeacoffee.com/devsdocode"><img alt="Buy Me A Coffee" src="https://img.shields.io/badge/Buy%20Me%20A%20Coffee-FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=black"></a>
 </div>
+
+
