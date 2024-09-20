@@ -1,0 +1,1 @@
+Please note that the model is quite large, with a size of 128.7MB. As such, it is not included in the repository. Instead, you can download it from the link provided in the Github repository and place it in this location.
