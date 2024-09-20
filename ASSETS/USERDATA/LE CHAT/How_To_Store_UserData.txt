@@ -1,0 +1,3 @@
+Watch this video -> https://youtu.be/9gsIbNv--K8
+
+Please be aware that in order to correctly install the user data in this specific directory of the assets folder for LE CHAT, the process is quite complex and requires the Chrome user data to be updated here. As a result, it cannot be adequately explained in text, so instead, please watch the demonstration provided in the video above.

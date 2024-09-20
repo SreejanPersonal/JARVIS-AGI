@@ -52,8 +52,8 @@ while True:
         print("Updated Speech:", speech)
 
         response_img_or_text = concurrent.futures.ThreadPoolExecutor().submit(deepInfra_TEXT.generate, [{"role": "user", "content": "Text to Classify -->" + speech}], system_prompt=BISECTORS.image_requests_v3)
-        response_classifier = concurrent.futures.ThreadPoolExecutor().submit(deepInfra_TEXT.generate, [{"role": "user", "content": "Text to Classify -->" + speech}], system_prompt=BISECTORS.complex_task_classifier_v5, stream=False)
-        default_response = concurrent.futures.ThreadPoolExecutor().submit(openrouter.generate, history_manager.history, system_prompt=INSTRUCTIONS.human_response_v3_AVA, stream=False)
+        response_classifier = concurrent.futures.ThreadPoolExecutor().submit(deepInfra_TEXT.generate, [{"role": "user", "content": "Text to Classify -->" + speech}], system_prompt=BISECTORS.complex_task_classifier_v6, stream=False)
+        default_response = concurrent.futures.ThreadPoolExecutor().submit(deepInfra_TEXT.generate, history_manager.history, system_prompt=INSTRUCTIONS.human_response_v3_AVA, stream=False)
         
         concurrent.futures.wait([response_img_or_text, response_classifier, default_response])
         print("Response Classifier >> ", "\033[91m" + response_classifier.result() + "\033[0m")
@@ -63,8 +63,29 @@ while True:
             speak("Sure Sir, Generating Your Image")
             decohere_ai.generate(speech)
             continue
+        
+        elif all(x in response_classifier.result().lower() for x in ("vision", "website", "call", "youtube")):
+            print("\033[91mConfused with Classification. Using Default Response\033[0m")
+            speak(default_response.result())
 
-        if "vision" in response_classifier.result().lower():
+        elif "system control" in response_classifier.result().lower():
+            # Create a ThreadPoolExecutor and submit the speak function
+            with concurrent.futures.ThreadPoolExecutor() as executor:
+                speak_future = executor.submit(speak, "Sure Sir. Setting the Required Settings")
+
+                speech_lower = speech.lower()
+                if "dark" in speech_lower or "light" in speech_lower:
+                    theme = 0 if "dark" in speech_lower else 1
+                    system_theme.WindowsThemeManager().set_theme(theme)
+                elif any(alignment in speech_lower for alignment in ["left", "center", "centre", "right"]):
+                    alignment = 0 if "left" in speech_lower else 1
+                    taskbar.TaskbarCustomizer().set_alignment(alignment)
+                elif "temperature" in speech_lower:
+                    taskbar.TaskbarCustomizer().set_temperature_display(1)
+
+                speak_future.result()
+
+        elif "vision" in response_classifier.result().lower():
             concurrent.futures.ThreadPoolExecutor().submit(speak("Analysing, Please Wait"))
             image_path = camera_vision.realtime_vision()
             response_vison = deepInfra_VISION.generate(speech, system_prompt=INSTRUCTIONS.vison_realtime_v1, image_path=image_path)
@@ -94,7 +115,7 @@ while True:
         # chat_response = Phind.generate(history_manager.history, system_prompt=INSTRUCTIONS.human_response_v3_AVA, stream=True)
         
         # chat_response = Pi_Ai.generate(speech, prints=False)
-        chat_response = ai_model.generate(speech)
+        chat_response = Hugging_Face_TEXT.generate(speech)
         print("\n\033[92mJARVIS >> {}\033[0m\n".format(chat_response))
         history_manager.update_file(speech, chat_response)
         speak(chat_response)

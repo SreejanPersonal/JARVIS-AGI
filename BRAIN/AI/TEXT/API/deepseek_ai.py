@@ -32,7 +32,7 @@ class DeepSeekAPI:
         clear_response = self.api_session.post(f'{self.api_base_url}/clear_context', json=clear_payload)
         clear_response.raise_for_status()  # Raises an HTTPError if the HTTP request returned an unsuccessful status code
 
-    def generate(self, user_message: str, response_temperature: float = 1.0, model_type: Optional[str] = "deepseek_chat", verbose: bool = False) -> str:
+    def generate(self, user_message: str, response_temperature: float = 1.0, model_type: Optional[str] = "deepseek_chat", verbose: bool = False, system_prompt: Optional[str] = "Be Short & Concise") -> str:
         """
         Generates a response from the DeepSeek API based on the provided message.
 
@@ -41,6 +41,7 @@ class DeepSeekAPI:
             response_temperature (float, optional): The creativity level of the response. Defaults to 1.0.
             model_type (str, optional): The model class to be used for the chat session.
             verbose (bool, optional): Whether to print the response content. Defaults to False.
+            system_prompt (str, optional): The system prompt to be used. Defaults to "Be Short & Concise".
 
         Returns:
             str: The concatenated response content received from the API.
@@ -50,7 +51,7 @@ class DeepSeekAPI:
             - deepseek_code
         """
         request_payload = {
-            "message": user_message,
+            "message": f"[Instructions: {system_prompt}]\n\nUser Query:{user_message}",
             "stream": True,
             "model_preference": None,
             "model_class": model_type,

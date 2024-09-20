@@ -13,12 +13,12 @@ text = 'सूरज की किरणें धीरे-धीरे  पे
 for i in range(5):
     start = time.time()
     async_generator.speak(text)
-    print(f"\033[92m\nAsync Hearling Audio Generator response time: {time.time() - start:.2f} seconds\033[0m") # Green
+    print(f"\033[92m\nAsync Hearling Audio Generator response time: {time.time() - start:.2f} seconds\033[0m")
 
     start = time.time()
     partial_async_generator.speak(text)
-    print(f"\033[94mPartial Async Bearling Audio Generator response time: {time.time() - start:.2f} seconds\033[0m") # Blue
+    print(f"\033[94mPartial Async Bearling Audio Generator response time: {time.time() - start:.2f} seconds\033[0m")
 
     start = time.time()
     generator.speak(text)
-    print(f"\033[93mHearling Audio Generator response time: {time.time() - start:.2f} seconds\033[0m") # Yellow
+    print(f"\033[93mHearling Audio Generator response time: {time.time() - start:.2f} seconds\033[0m")
