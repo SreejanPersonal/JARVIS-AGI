@@ -59,78 +59,142 @@ JARVIS-AGI is an advanced AI project designed to integrate multiple AI capabilit
 The project is organized into several key directories:
 
 ```
-JARVIS-AGI-main/
-│
-├── ASSETS
-│   ├── SOUNDS
-│   └── Vosk
-│       └── vosk-model-small-en-us-0.15
-│
-├── BRAIN
-│   ├── AI
-│   │   ├── IMAGE
+JARVIS-AGI/
+├── .env
+├── .env.example
+├── .gitattributes
+├── .gitignore
+├── ASSETS/
+│   ├── CLAP_DETECTS/
+│   │   └── MODELS/
+│   │       └── Model.txt
+│   ├── SOUNDS/
+│   │   ├── activation_sound.wav
+│   │   ├── audio_file.mp3
+│   │   └── deactivation_sound.wav
+│   ├── STREAM_AUDIOS/
+│   │   ├── output_audio_6.mp3
+│   │   ├── output_audio_7.mp3
+│   │   ├── output_audio_8.mp3
+│   │   ├── output_audio_9.mp3
+│   │   ├── output_audio_10.mp3
+│   │   ├── output_audio_11.mp3
+│   │   ├── output_audio_12.mp3
+│   │   ├── output_audio_13.mp3
+│   │   ├── output_audio_14.mp3
+│   │   ├── output_audio_15.mp3
+│   │   ├── output_audio_16.mp3
+│   │   ├── output_audio_17.mp3
+│   │   ├── output_audio_18.mp3
+│   │   ├── output_audio_19.mp3
+│   │   └── output_audio_20.mp3
+│   ├── USERDATA/
+│   │   └── LE CHAT/
+│   │       └── How_To_Store_UserData.txt
+│   ├── Vosk/
+│   ├── available_working_proxies.txt
+│   ├── conversation_history.json
+│   └── openGPT_IDs.txt
+├── BRAIN/
+│   ├── AI/
+│   │   ├── IMAGE/
 │   │   │   ├── decohere_ai.py
 │   │   │   └── deepInfra_IMG.py
-│   │   ├── TEXT
-│   │   │   └── API
-│   │   │       ├── Blackbox_ai.py
-│   │   │       ├── FarFalle.py
-│   │   │       ├── Phind.py
-│   │   │       ├── Pi_Ai.py
-│   │   │       ├── deepInfra_TEXT.py
-│   │   │       ├── deepseek_ai.py
-│   │   │       ├── hugging_chat.py
-│   │   │       └── openrouter.py
-│   │   └── VISION
+│   │   ├── TEXT/
+│   │   │   ├── API/
+│   │   │   │   ├── Blackbox_ai.py
+│   │   │   │   ├── Bnn_GPT.py
+│   │   │   │   ├── FarFalle.py
+│   │   │   │   ├── Hugging_Face_TEXT.py
+│   │   │   │   ├── Le_Chat.py
+│   │   │   │   ├── Phind.py
+│   │   │   │   ├── Pi_Ai.py
+│   │   │   │   ├── Uncensored.py
+│   │   │   │   ├── basedGPT.py
+│   │   │   │   ├── deepInfra_TEXT.py
+│   │   │   │   ├── deepseek_ai.py
+│   │   │   │   ├── hugging_chat.py
+│   │   │   │   ├── liaobots.py
+│   │   │   │   ├── openGPT.py
+│   │   │   │   └── openrouter.py
+│   │   │   ├── LOCAL/
+│   │   │   │   └── llama_CPP.py
+│   │   │   └── STREAM/
+│   │   │       ├── basedGPT.py
+│   │   │       └── deepInfra_TEXT.py
+│   │   └── VISION/
 │   │       └── deepInfra_VISION.py
-│   └── TOOLS
+│   └── TOOLS/
 │       └── groq_web_access.py
-│
-├── ENGINE
-│   ├── STT
+├── ENGINE/
+│   ├── STT/
 │   │   ├── DevsDoCode.py
 │   │   ├── NetHyTech.py
-│   │   ├── src
+│   │   ├── src/
 │   │   │   └── index.html
 │   │   └── vosk_recog.py
-│   └── TTS
+│   └── TTS/
+│       ├── STREAMING/
+│       │   ├── DeepGram.py
+│       │   └── speechify.py
 │       ├── DeepGram.py
+│       ├── ElevenLabs.py
 │       ├── ai_voice.py
 │       ├── deepAI.py
 │       ├── edge_tts.py
 │       ├── hearling.py
+│       ├── speechify.py
 │       └── stream_elements_api.py
-│
-├── PLAYGROUND
-│   ├── ADB_CALL
+├── PLAYGROUND/
+│   ├── ADB_CALL/
 │   │   ├── ADB COMMANDS.txt
 │   │   ├── Details.txt
 │   │   ├── IMP Commands.txt
+│   │   ├── Information.txt
 │   │   ├── android_device_connection_setup.py
 │   │   └── make_call.py
-│   ├── CAMERA
+│   ├── CAMERA/
 │   │   └── camera_vision.py
-│   └── WEBSITE_ASSISTANT
+│   ├── CLAP_NN/
+│   │   ├── DATASETS/
+│   │   │   └── Informtation.txt
+│   │   ├── ClapDetector.py
+│   │   ├── Model_Trainer.py
+│   │   ├── audio_inference.py
+│   │   ├── cnn_sound_model.py
+│   │   └── load_dataset.py
+│   └── WEBSITE_ASSISTANT/
 │       ├── chrome_latest_url.py
 │       └── jenna_reader.py
-│
-├── PROMPTS
+├── PROMPTS/
 │   ├── BISECTORS.py
 │   ├── INSTRUCTIONS.py
 │   ├── PROMPTS.py
 │   └── SYSTEM.py
-│
-├── TOOLS
-│   ├── AUDIO
+├── TOOLS/
+│   ├── AUDIO/
 │   │   ├── Hotword_Detection.py
 │   │   └── Interrupted_Playsound.py
+│   ├── LE_CHAT_COOKIES/
+│   │   └── Cookie_Extractor.py
+│   ├── SYSTEM_SETTINGS/
+│   │   ├── SETTING.py
+│   │   ├── system_theme.py
+│   │   └── taskbar.py
 │   ├── Alpaca_DS_Converser.py
-│   └── RawDog.py
-│
+│   ├── ProxyAPI.py
+│   ├── RawDog.py
+│   ├── TXT_DS_Converser.py
+│   ├── Web_Results.py
+│   └── stream_audio_cleanup.py
 ├── CODE_OF_CONDUCT.md
 ├── IMPORTS.py
-├── LICENSE
+├── LICENCE
+├── Le_Chat_Tester.py
+├── Memory ConvoTxt.py
 ├── SpeedTester.py
+├── StreamSpeak.py
+├── WebTester.py
 ├── main.py
 ├── readme.md
 └── requirements.txt
@@ -190,7 +254,7 @@ We welcome contributions to improve JARVIS-AGI. To contribute, follow these step
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/SreejanPersonal/JARVIS-AGI/blob/main/LICENCE) file for details.
 
 ## Connect with Us
 
