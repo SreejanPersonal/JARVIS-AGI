@@ -32,6 +32,5 @@ def get_latest_chrome_url() -> str:
     print("Latest URL:", latest_url)
     return latest_url
 
-
 if __name__ == "__main__":
     latest_url = get_latest_chrome_url()
