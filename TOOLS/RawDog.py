@@ -1,8 +1,6 @@
 from typing import Dict, Any
-
 from rich.console import Console
 from rich.markdown import Markdown
-
 import webscout
 import webscout.AIutel
 
@@ -39,7 +37,7 @@ class TaskExecutor:
         # Optional Features
         self._web_search_enabled: bool = False
         self._rawdog_enabled: bool = True
-        self._internal_script_execution_enabled: bool = False
+        self._internal_script_execution_enabled: bool = True
         self._script_confirmation_required: bool = False
         self._selected_interpreter: str = "python"
         self._selected_optimizer: str = "code"
@@ -51,20 +49,14 @@ class TaskExecutor:
         # AI provider mapping
         self._ai_provider_mapping: Dict[str, Any] = {
             "phind": webscout.PhindSearch,
-            "opengpt": webscout.OPENGPT,
             "koboldai": webscout.KOBOLDAI,
             "blackboxai": webscout.BLACKBOXAI,
-            "llama2": webscout.LLAMA2,
             "yepchat": webscout.YEPCHAT,
-            "leo": webscout.LEO,
             "groq": webscout.GROQ,
             "openai": webscout.OPENAI,
-            "perplexity": webscout.PERPLEXITY,
             "you": webscout.YouChat,
-            "xjai": webscout.Xjai,
             "cohere": webscout.Cohere,
             "reka": webscout.REKA,
-            "thinkany": webscout.ThinkAnyAI,
         }
 
         # Initialize Rawdog if enabled
@@ -161,4 +153,4 @@ if __name__ == "__main__":
     assistant = TaskExecutor()
     while True:
         input_query = input("Enter your query: ")
-        assistant.process_query(input_query)
+        print(f"Jarvis: {assistant.process_query(input_query)}\n")

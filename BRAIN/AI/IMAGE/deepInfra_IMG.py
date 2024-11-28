@@ -22,7 +22,7 @@ def generate(prompt: str, model: str = "stability-ai/sdxl", negative_prompt: str
 
     url=f"https://api.deepinfra.com/v1/inference/{model}"
     headers = {
-        "Authorization" : f"Bearer {os.environ.get('DEEPINFRA')}",
+        # "Authorization" : f"Bearer {os.environ.get('DEEPINFRA')}",
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
     }
     payload = {
