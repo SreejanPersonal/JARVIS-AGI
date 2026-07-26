@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#07111f" />
+    <title>JARVIS · Local Agent</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <button id="menuButton" class="icon-button" aria-label="Open skill menu" title="Skills and settings">☰</button>
+        <div class="brand" aria-label="Jarvis local agent">
+          <span class="brand-mark" aria-hidden="true">J</span>
+          <span>JARVIS</span>
+          <small>LOCAL AGENT</small>
+        </div>
+        <div class="header-tools">
+          <span id="healthDot" class="health-dot is-pending" title="Checking service health"></span>
+          <select id="profileSelect" class="profile-select" aria-label="Active profile"></select>
+          <button id="newProfileButton" class="icon-button" aria-label="Add profile" title="Add profile">＋</button>
+        </div>
+      </header>
+
+      <main id="chat" class="chat" aria-live="polite">
+        <section class="welcome-card" id="welcomeCard">
+          <div class="orb" aria-hidden="true"></div>
+          <p class="eyebrow">YOUR PRIVATE SEARCH &amp; MEMORY ASSISTANT</p>
+          <h1>How can I help?</h1>
+          <p>Ask a question, talk naturally, search the web with sources, or save something important to your private profile.</p>
+          <div class="suggestions" id="suggestions">
+            <button class="suggestion">What is on my calendar today?</button>
+            <button class="suggestion">Find a good dinner idea near me</button>
+            <button class="suggestion">Remember that I prefer quiet restaurants</button>
+            <button class="suggestion">Summarise the latest technology news</button>
+          </div>
+        </section>
+      </main>
+
+      <section class="composer-wrap">
+        <div id="statusLine" class="status-line" aria-live="polite">Ready</div>
+        <form id="chatForm" class="composer">
+          <button id="voiceButton" class="icon-button prominent" type="button" aria-label="Talk to Jarvis" title="Talk to Jarvis">⌁</button>
+          <textarea id="messageInput" rows="1" maxlength="6000" placeholder="Ask Jarvis anything…" aria-label="Message Jarvis"></textarea>
+          <label class="web-toggle" title="Include live web search">
+            <input id="webToggle" type="checkbox" checked />
+            <span>Web</span>
+          </label>
+          <button id="sendButton" class="send-button" type="submit" aria-label="Send message">↑</button>
+        </form>
+        <div class="composer-actions">
+          <button id="speakToggle" class="text-button" type="button" aria-pressed="false">Voice replies: Off</button>
+          <button id="wakeWordButton" class="text-button" type="button" aria-pressed="false" title="Visible browser microphone listener; default phrase: Jarvis">Wake word: Off</button>
+          <button id="cameraButton" class="text-button" type="button">Camera</button>
+          <button id="saveMemoryButton" class="text-button" type="button">Save last reply</button>
+          <button id="planTaskButton" class="text-button" type="button">Plan task</button>
+        </div>
+      </section>
+    </div>
+
+    <aside id="sidePanel" class="side-panel" aria-label="Skills and settings" aria-hidden="true">
+      <div class="panel-header">
+        <div>
+          <p class="eyebrow">MODULES</p>
+          <h2>Skills</h2>
+        </div>
+        <button id="closePanelButton" class="icon-button" aria-label="Close skill menu">×</button>
+      </div>
+      <p class="panel-copy">Enable only the capabilities you plan to configure. Skills that use cloud accounts or physical devices show their setup requirement.</p>
+      <div id="skillsList" class="skills-list"></div>
+      <hr />
+      <section class="drive-panel">
+        <p class="eyebrow">GOOGLE DRIVE MIRROR</p>
+        <h3>Private document import</h3>
+        <p id="driveStatus">Checking the optional Drive mirror…</p>
+        <button id="refreshDriveButton" class="text-button" type="button">Refresh Drive files</button>
+        <div id="driveFiles" class="drive-files"></div>
+      </section>
+      <hr />
+      <section class="action-panel">
+        <p class="eyebrow">ACTION RULES</p>
+        <h3>Trusted automation</h3>
+        <p>Messages and reservations always ask for approval. For trusted file, location, or device rules, configure named targets on the server.</p>
+      </section>
+    </aside>
+    <div id="panelScrim" class="scrim" hidden></div>
+
+    <dialog id="profileDialog" class="dialog">
+      <form id="profileForm" method="dialog">
+        <button class="dialog-close" value="cancel" aria-label="Close">×</button>
+        <p class="eyebrow">NEW PROFILE</p>
+        <h2>Create a profile</h2>
+        <label>Display name<input id="profileName" required maxlength="96" autocomplete="name" /></label>
+        <label>Profile ID<input id="profileId" required maxlength="96" pattern="[a-zA-Z0-9_-]+" placeholder="e.g. alex" /></label>
+        <label class="check-label"><input id="profileConsent" type="checkbox" /> This person has agreed to a profile and stored preferences.</label>
+        <div class="dialog-actions">
+          <button class="secondary-button" value="cancel">Cancel</button>
+          <button class="primary-button" id="createProfileButton" value="default">Create profile</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="cameraDialog" class="dialog camera-dialog">
+      <form method="dialog">
+        <button class="dialog-close" value="cancel" aria-label="Close">×</button>
+        <p class="eyebrow">CAMERA</p>
+        <h2>Explicit camera capture</h2>
+        <video id="cameraPreview" autoplay playsinline muted></video>
+        <canvas id="cameraCanvas" hidden></canvas>
+        <p id="cameraHint">Camera is off. Start it only when you are ready.</p>
+        <label class="check-label"><input id="enrollmentConsent" type="checkbox" /> The active person has explicitly agreed to save this photo as their local profile enrollment image.</label>
+        <div class="dialog-actions">
+          <button id="stopCameraButton" class="secondary-button" type="button">Stop</button>
+          <button id="startCameraButton" class="primary-button" type="button">Start camera</button>
+          <button id="captureCameraButton" class="primary-button" type="button" disabled>Capture audit</button>
+          <button id="enrollCameraButton" class="primary-button" type="button" disabled>Save enrollment photo</button>
+        </div>
+      </form>
+    </dialog>
+
+    <template id="messageTemplate">
+      <article class="message">
+        <div class="message-label"></div>
+        <div class="message-body"></div>
+      </article>
+    </template>
+
+    <script type="module" src="/static/app.js"></script>
+  </body>
+</html>

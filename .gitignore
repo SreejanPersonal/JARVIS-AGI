@@ -1,1 +1,16 @@
 .env
+
+# New kiosk-agent deployment configuration and local runtime files
+.env.agent
+agent_server/.env
+__pycache__/
+*.py[cod]
+agent_server/__pycache__/
+agent_server/app/__pycache__/
+agent_server/app/*/__pycache__/
+agent_server/.pytest_cache/
+agent_server/data/
+searxng/cache/
+*.sqlite
+*.db
+*.log
