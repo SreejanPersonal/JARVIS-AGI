@@ -1,0 +1,17 @@
+use_default_settings: true
+
+general:
+  debug: false
+
+server:
+  bind_address: "0.0.0.0"
+  limiter: false
+  public_instance: false
+  image_proxy: false
+  method: "GET"
+
+search:
+  safe_search: 1
+  formats:
+    - html
+    - json

@@ -1,0 +1,72 @@
+name: jarvis-kiosk-agent
+
+services:
+  agent-server:
+    build:
+      context: ./agent_server
+    image: jarvis-kiosk-agent:local
+    restart: unless-stopped
+    init: true
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=64m
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    pids_limit: 256
+    environment:
+      APP_NAME: ${APP_NAME:-Jarvis Kiosk Agent}
+      DATA_DIR: /data
+      DATABASE_FILE: ${DATABASE_FILE:-agent.db}
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-llama3.2:3b}
+      OLLAMA_VISION_MODEL: ${OLLAMA_VISION_MODEL:-}
+      SEARXNG_BASE_URL: http://searxng:8080
+      SEARCH_RESULT_LIMIT: ${SEARCH_RESULT_LIMIT:-6}
+      REQUEST_TIMEOUT_SECONDS: ${REQUEST_TIMEOUT_SECONDS:-45}
+      AGENT_STEP_LIMIT: ${AGENT_STEP_LIMIT:-4}
+      MAX_CONTEXT_CHARS: ${MAX_CONTEXT_CHARS:-12000}
+      OWNER_PROFILE_NAME: ${OWNER_PROFILE_NAME:-Owner}
+      ACTION_WEBHOOK_URL: ${ACTION_WEBHOOK_URL:-}
+      ACTION_WEBHOOK_TOKEN: ${ACTION_WEBHOOK_TOKEN:-}
+      PUBLIC_ORIGIN: ${PUBLIC_ORIGIN:-}
+      GOOGLE_DRIVE_SYNC_DIR: ${GOOGLE_DRIVE_SYNC_DIR:-}
+    ports:
+      - "${AGENT_BIND_ADDRESS:-0.0.0.0}:${AGENT_PORT:-8080}:8080"
+    volumes:
+      - agent_data:/data
+      - ${GOOGLE_DRIVE_HOST_DIR:-./runtime/google-drive}:/mnt/google-drive:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      searxng:
+        condition: service_started
+    networks:
+      - agent_net
+
+  searxng:
+    image: ${SEARXNG_IMAGE:-searxng/searxng:latest}
+    restart: unless-stopped
+    init: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    pids_limit: 256
+    environment:
+      SEARXNG_SECRET: ${SEARXNG_SECRET:?Set SEARXNG_SECRET in .env before starting}
+      SEARXNG_LIMITER: "false"
+    volumes:
+      - ./searxng:/etc/searxng:rw
+      - searxng_cache:/var/cache/searxng
+    networks:
+      - agent_net
+
+networks:
+  agent_net:
+    driver: bridge
+
+volumes:
+  agent_data:
+  searxng_cache:
